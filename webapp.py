@@ -93,7 +93,7 @@ def sidebar():
     with tabs[1]:
         provedor = st.selectbox('Selecione o modelo',MODELO_IA.keys())
         modelo = st.selectbox('Selecione o modelo',MODELO_IA[provedor]['modelos'])
-        api_key = os.environ["OPENAI_API_KEY"]        
+        api_key = os.environ["API_OPENAI"]        
     
     if st.button('Carrega Assistente',use_container_width=True):
         carrega_modelo(provedor=provedor, modelo=modelo, api_key=api_key, tipo_arquivo=tipo_arquivo, arquivo=arquivo)
