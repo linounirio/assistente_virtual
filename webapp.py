@@ -93,7 +93,11 @@ def sidebar():
     with tabs[1]:
         provedor = st.selectbox('Selecione o modelo',MODELO_IA.keys())
         modelo = st.selectbox('Selecione o modelo',MODELO_IA[provedor]['modelos'])
-        api_key = os.environ["API_OPENAI"]        
+        #api_key = os.environ["OPENAI_API_KEY"]
+        api_key = st.text_input('insira a chave da API')
+        if not api_key:
+            st.error('Insira uma chave de API Válida para o modelo escolhido')
+            st.stop()         
     
     if st.button('Carrega Assistente',use_container_width=True):
         carrega_modelo(provedor=provedor, modelo=modelo, api_key=api_key, tipo_arquivo=tipo_arquivo, arquivo=arquivo)
