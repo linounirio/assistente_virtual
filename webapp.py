@@ -103,6 +103,7 @@ def sidebar():
 def main():
     with st.sidebar:
         sidebar()
+        
     pagina_chat()
     
 if __name__=='__main__':
