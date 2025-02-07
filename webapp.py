@@ -75,10 +75,7 @@ def pagina_chat():
         chat.markdown(input_usuario)
         #Assistente
         chat = st.chat_message('ai')
-        resposta = chat.write_stream(chain.stream({
-            'input':input_usuario,
-            'chat_history':memoria.buffer_as_messages
-            }))
+        resposta = chat.write_stream(chain.stream(input_usuario))
         #inserindo na memória
         memoria.chat_memory.add_user_message(input_usuario)
         memoria.chat_memory.add_ai_message(resposta)
@@ -96,7 +93,7 @@ def sidebar():
     with tabs[1]:
         provedor = st.selectbox('Selecione o modelo',MODELO_IA.keys())
         modelo = st.selectbox('Selecione o modelo',MODELO_IA[provedor]['modelos'])
-        api_key = os.environ["API_KEY_OPENAI"]        
+        api_key = os.environ["OPENAI_API_KEY"]        
     
     if st.button('Carrega Assistente',use_container_width=True):
         carrega_modelo(provedor=provedor, modelo=modelo, api_key=api_key, tipo_arquivo=tipo_arquivo, arquivo=arquivo)
